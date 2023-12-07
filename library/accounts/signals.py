@@ -7,8 +7,11 @@ def post_save_funct(sender,instance,created,**kwargs):
     if created:
         UserProfile.objects.create(user=instance)
     else:
-        updated_user_profile = UserProfile.objects.get(user=instance)
-        updated_user_profile.save()
+        try:
+            updated_user_profile = UserProfile.objects.get(user=instance)
+            updated_user_profile.save()
+        except UserProfile.DoesNotExist:
+            UserProfile.objects.create()
 
 @receiver(pre_save, sender = User)
 def pre_save_funct(sender, instance, **kwargs):
