@@ -64,6 +64,15 @@
       <div class="links">  
 
       </div> 
+      <ul class = "errorlist">
+        {% for field in user_form %}
+        {% if field.errors %}
+        {% for error in field.errors %}
+        <li style="color: darkred;">{{error}}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
 
       <div class="inputBox"> 
 
