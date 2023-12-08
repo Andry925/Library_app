@@ -18,5 +18,12 @@ def registration(request):
             "user_form": user_form_with_data
         }
         return render(request, "accounts/register.html", context)
-    user_form_with_data.save()
+    object_with_hashed_password = hash_password(user_form=user_form_with_data)
+    object_with_hashed_password.save()
     return redirect("register")
+
+def hash_password(user_form):
+    password = user_form.cleaned_data["password"]
+    user = user_form.save(commit = False)
+    user.set_password(password)
+    return user
