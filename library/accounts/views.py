@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .forms import UserForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 def registration(request):
@@ -32,14 +32,17 @@ def login_user(request):
     if request.method != "POST":
         return render(request, "accounts/login.html")
 
-    email = request.POST["email"]
-    password = request.POST["password"]
-
+    email = request.POST.get("email")
+    password = request.POST.get("password")
     user = authenticate(email=email, password=password)
     if user:
         login(request, user)
         return redirect("userprofile")
-    raise ValueError()
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("login")
 
 
 def dashboard(request):
