@@ -23,9 +23,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    USER = "User"
+    LIBRARIAN = "Librarian"
     AVAILABLE_ROLES = (
-        (1, "User"),
-        (2, "Librarian")
+        (USER, "User"),
+        (LIBRARIAN, "Librarian")
     )
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=30)
@@ -39,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     updated_at = models.DateTimeField(auto_now=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name','username']
 
     objects = UserManager()
 
@@ -51,6 +53,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return True
+    
+
 
 
 class UserProfile(models.Model):
