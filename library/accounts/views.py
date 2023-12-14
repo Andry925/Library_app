@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
-from .forms import UserForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from . utils import manage_user
+from .forms import UserForm
 
 
 def registration(request):
@@ -37,13 +39,27 @@ def login_user(request):
     user = authenticate(email=email, password=password)
     if user:
         login(request, user)
-        return redirect("userprofile")
+        return determine_appropraite_profile(request)
 
 
+@login_required(login_url="login")
 def logout_user(request):
     logout(request)
     return redirect("login")
 
 
-def dashboard(request):
+@login_required(login_url="login")
+def determine_appropraite_profile(request):
+    user = request.user
+    user_url = manage_user(user)
+    return redirect(user_url)
+
+
+@login_required(login_url="login")
+def redirect_user(request):
     return render(request, "accounts/userprofile.html")
+
+
+@login_required(login_url="login")
+def redirect_librarian(request):
+    return render(request, "accounts/librarianprofile.html")
