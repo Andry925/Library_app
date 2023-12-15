@@ -1,95 +1,51 @@
-<!doctype html>
+{% extends 'accounts/base.html' %}
 {% load static %}
 
-<html lang="en"> 
+{% block content %}
+  <div class="signin">
+    <div class="content">
+      <h2>Register</h2>
 
- <head> 
-
-  <meta charset="UTF-8"> 
-
-  <title>Register</title> 
-
-  <link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}"> 
-
- </head> 
-
- <body> 
-
-  <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
-
-   <div class="signin"> 
-
-    <div class="content"> 
-
-     <h2>Register</h2> 
-
-     <form action="{% url 'register' %}" class="form" method="post"> 
-      {% csrf_token %}
-      <div class="inputBox"> 
-
-       {{user_form.email}}<i>Email</i>
-
-      </div> 
-        <div class="inputBox"> 
-
-       {{user_form.first_name}} <i>Name</i> 
-
-      </div> 
-      <div class="inputBox"> 
-
-       {{user_form.last_name}} <i>Last Name</i> 
-
-      </div> 
-      <div class="inputBox"> 
-
-       {{user_form.username}} <i>Username</i> 
-
-      </div> 
-      <div class="inputBox"> 
-
-       {{user_form.password}} <i>Password</i> 
-
-      </div>
-
-      <div class="inputBox"> 
-
-        {{user_form.confirm_password}} <i>Confirm your password</i> 
- 
-       </div>
-  
-      <div class="inputBox">
-        {{user_form.role}}
-        
-      </div>
-      <div class="links">  
-
-      </div> 
-      <ul class = "errorlist">
-        {% for field in user_form %}
-        {% if field.errors %}
-        {% for error in field.errors %}
-        <li style="color: darkred;">{{error}}</li>
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
-        <li style="color: darkred;">{{user_form.non_field_errors}}</li>
-      </ul>
-
-      <div class="inputBox"> 
-
-       <input type="submit" value="Register"> 
-
-      </div> 
-      
-
-     </div> 
-
-    </div> 
-
-   </div> 
-
-  </section> 
-
- </body>
-
-</html>
+      <form action="{% url 'register' %}" class="form" method="post">
+        {% csrf_token %}
+        <div class="inputBox">
+          {{registration_form.email}}<i>Email</i>
+        </div>
+        <div class="inputBox">
+          {{registration_form.first_name}} <i>Name</i>
+        </div>
+        <div class="inputBox">
+          {{registration_form.last_name}} <i>Last Name</i>
+        </div>
+        <div class="inputBox">
+          {{registration_form.username}} <i>Username</i>
+        </div>
+        <div class="inputBox">
+          {{registration_form.password}} <i>Password</i>
+        </div>
+        <div class="inputBox">
+          {{registration_form.confirm_password}} <i>Confirm your password</i>
+        </div>
+        <div class="inputBox">
+          {{registration_form.role}}
+        </div>
+        <div class="links">
+          
+        </div>
+        <ul class="errorlist">
+          {% for field in registeration_form %}
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <li style="color: darkred;">{{error}}</li>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          <li style="color: darkred;">{{registration_form.non_field_errors}}</li>
+        </ul>
+        <div class="inputBox">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
