@@ -55,7 +55,7 @@ class LoginView(View):
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
 class UserProfileView(View):
-    template_name = "accounts/userprofile.html"
+    template_name = "profiles/userprofile.html"
 
     def get(self, request):
         return render(request, self.template_name)
@@ -63,7 +63,7 @@ class UserProfileView(View):
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
 class LibrarianProfileView(View):
-    template_name = "accounts/librarianprofile.html"
+    template_name = "profiles/librarianprofile.html"
 
     def get(self, request):
         return render(request, self.template_name)
