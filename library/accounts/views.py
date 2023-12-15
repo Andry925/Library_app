@@ -1,7 +1,9 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views import View
-from library.accounts.utils import manage_user
+from .utils import manage_user
 from .forms import UserForm
 
 
@@ -19,7 +21,7 @@ class RegistrationView(View):
         if registration_form.is_valid():
             user_with_hashed_password = self.hash_password(registration_form)
             user_with_hashed_password.save()
-            return redirect("register")
+            return redirect("login")
         context = {"registration_form": registration_form}
         return render(request, self.template_name, context)
 
@@ -42,4 +44,33 @@ class LoginView(View):
         user = authenticate(email=email, password=password)
         if user:
             login(request, user)
+            return self.determine_appropriate_profile(request)
         return render(request, self.template_name)
+
+    def determine_appropriate_profile(self, request):
+        user = request.user
+        user_url = manage_user(user)
+        return redirect(user_url)
+
+
+@method_decorator(login_required(login_url="login"), name="dispatch")
+class UserProfileView(View):
+    template_name = "accounts/userprofile.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+@method_decorator(login_required(login_url="login"), name="dispatch")
+class LibrarianProfileView(View):
+    template_name = "accounts/librarianprofile.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+@method_decorator(login_required(login_url="login"), name="dispatch")
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('login')
