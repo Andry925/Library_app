@@ -2,5 +2,8 @@
 
 {% block content %}
 <p>Welcome to our account {{user.username}}</p>
+
 <p>Your role is {{user.role}} </p>
+<p><a href = "{% url 'all_authors' %}"> Click here to manage authors</a></p>
+
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'author/base.html' %}
+{% block content%}
+<div class="container">
+<div style="margin: 0 auto;">
+    <h1> All authors:</h1>
+    <br>
+
+    <table border="1">
+        <tr>
+            <th>AUTHOR_ID</th>
+            <th>AUTHOR_NAME</th>
+            <th>AUTHOR_SURNAME</th>
+            <th>AUTHOR_PATRONYMIC</th>
+        </tr>
+
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.id }}</td>
+                <td>{{ author.name }}</td>
+                <td>{{ author.surname }}</td>
+                <td>{{ author.patronymic }}</td>
+                
+            </tr>
+        {% endfor %}
+
+    </table>
+   
+</div>
+</div>
+
+
+
+{% endblock %}
