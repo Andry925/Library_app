@@ -2,9 +2,6 @@
 {% block content%}
 <div class="container">
 <div style="margin: 0 auto;">
-        {% if request.GET.success == 'yes' %}
-        <p>Author created! Yes</p>
-    {% endif %}
 
     <h1>On this page you can add a new author</h1>
     <form action="{% url 'author_creation_form' %}" class="form" method="POST" >
@@ -15,7 +12,13 @@
       <button type="submit">Add author</button>
     </form>
 
-    <p>{{ message }}</p>
+    <div class ="errors">
+        {% if messages %}
+        {% for error_message in messages %}
+        <strong>{{error_message}}</strong>
+        {% endfor %}
+        {% endif %}
+    </div>
 
     <p><a href="{% url 'all_authors' %}">Return to author</a></p>
 </div>
