@@ -3,15 +3,32 @@
 <div class="row justify-content-center align-items-center">
   <div class="col-md-6 col-lg-6 p-0" style="position: absolute; bottom: 300px">
     <h1>Edit your task here</h1>
-    <form method="POST">
+    <form action="{% url 'edit_author' author.id %}" class = "form" method="POST">
       {% csrf_token %}
       <div class="form-group">
         <span style="display: flex">
           <input
             type="text"
-            name="edited_task"
+            name="name"
             class="form-control"
-            placeholder="Edit a task"
+            placeholder="Edit name"
+            value = "{{author.name}}"
+           
+          />
+          <input
+            type="text"
+            name="surname"
+            class="form-control"
+            placeholder="Edit surname"
+            value = "{{author.surname}}"
+           
+          />
+          <input
+            type="text"
+            name="patronymic"
+            class="form-control"
+            placeholder= "Edit patronymic"
+            value = "{{author.patronymic}}"
            
           />
           <button type="submit" class="btn btn-primary" style="width: 200px">
