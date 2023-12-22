@@ -11,17 +11,17 @@ class Author(models.Model):
         return f"{self.name} {self.surname}"
 
     @staticmethod
-    def get_author_by_id(authord_id):
+    def get_author_by_id(pk):
         try:
-            return Author.objects.get(id=authord_id)
+            return Author.objects.get(pk=pk)
 
         except Author.DoesNotExist:
             return None
 
     @staticmethod
-    def delete_by_id(authord_id):
+    def delete_by_id(pk):
         try:
-            author = Author.objects.get(id=authord_id)
+            author = Author.objects.get(pk=pk)
             author.delete()
             return True
         except Author.DoesNotExist:
