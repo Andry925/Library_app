@@ -31,4 +31,16 @@ class CreateUserView(View):
             error_message = "Author with this surname already exists"
             messages.error(request, error_message)
             return render(request, "author/new_author.html")
+
+class AuthorUpdateView(View):
+    template_path = "author/edit_author.html"
+
+    def get(self,request,pk):
+        author = Author.get_author_by_id(pk=pk)
+        context = {"author":author}
+        return render(request,self.template_path,context)
+
+
+class AuthorDeleteView(View):
+    pass
             
