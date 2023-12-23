@@ -1,31 +1,28 @@
-{% extends "author/base.html" %} {% block content %}
+{% extends "author/base.html" %}
 
+{% block content %}
 <div class="row justify-content-center align-items-center">
   <div class="col-md-6 col-lg-6 p-0" style="position: absolute; bottom: 300px">
     <h1>Edit your task here</h1>
-    <form action="{% url 'edit_author' author.id %}" class = "form" method="POST">
+    <form action="{% url 'edit_author' author.id %}" class="form" method="POST">
       {% csrf_token %}
       <div class="form-group">
-        
-        {% for field in fields %}
+        {% for field, value in field_values.items %}
           <span style="display: flex">
             <input
               type="text"
               name="{{ field }}"
               class="form-control"
               placeholder="Edit {{ field }}"
-              value="{{author.field}}"
+              value="{{value}}"
             />
           </span>
-       
         {% endfor %}
-          <button type="submit" class="btn btn-primary" style="width: 200px">
-            <i class="fa fa-plus"></i> Edit
-          </button>
-        </span>
+        <button type="submit" class="btn btn-primary" style="width: 200px">
+          <i class="fa fa-plus"></i> Edit
+        </button>
       </div>
     </form>
   </div>
 </div>
-
 {% endblock %}
