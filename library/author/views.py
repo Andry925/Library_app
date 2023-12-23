@@ -41,7 +41,8 @@ class AuthorUpdateView(View):
 
     def get(self, request, pk):
         author = Author.get_author_by_id(pk=pk)
-        context = {"author": author,"fields":self.fields}
+        field_values = {field: getattr(author, field) for field in self.fields}
+        context = {"author": author, "field_values": field_values}
         return render(request, self.template_path, context)
 
     def post(self, request, pk):
