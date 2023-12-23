@@ -31,22 +31,22 @@ class CreateUserView(View):
         except IntegrityError:
             error_message = "Author with this surname already exists"
             messages.error(request, error_message)
-            return render(request, "author/new_author.html")
+            return render(request, self.template_path)
 
 
 class AuthorUpdateView(View):
     template_path = "author/edit_author.html"
     redirect_url = "all_authors"
+    fields = ("name", "surname", "patronymic")
 
     def get(self, request, pk):
         author = Author.get_author_by_id(pk=pk)
-        context = {"author": author}
+        context = {"author": author,"fields":self.fields}
         return render(request, self.template_path, context)
 
     def post(self, request, pk):
-        fields = ("name", "surname", "patronymic")
         author = Author.get_author_by_id(pk=pk)
-        for field in fields:
+        for field in self.fields:
             setattr(author, field, request.POST.get(field))
         author.save()
         return redirect(self.redirect_url)
