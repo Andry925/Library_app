@@ -54,4 +54,8 @@ class AuthorUpdateView(View):
 
 
 class AuthorDeleteView(View):
-    pass
+    redirect_url = "all_authors"
+
+    def get(self, request, pk):
+        Author.delete_by_id(pk=pk)
+        return redirect(self.redirect_url)
