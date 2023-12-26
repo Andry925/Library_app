@@ -23,6 +23,11 @@
         </button>
       </div>
     </form>
+    <div class="errors">
+      {% if messages %} {% for error_message in messages %}
+      <strong>{{error_message}}</strong>
+      {% endfor %} {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}
