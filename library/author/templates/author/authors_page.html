@@ -16,7 +16,9 @@
         <th>AUTHOR_NAME</th>
         <th>AUTHOR_SURNAME</th>
         <th>AUTHOR_PATRONYMIC</th>
+        <th>AUTHORS_BOOKS</th>
         <th>Actions</th>
+
       </tr>
 
       {% for author in all_authors %}
@@ -26,6 +28,14 @@
         <td>{{ author.surname }}</td>
         <td>{{ author.patronymic }}</td>
         <td>
+        {% for book in author.books.all %}
+       
+        {{book }}
+        
+
+        {% endfor %}
+        </td>
+      <td>
           <a href="{% url 'edit_author' author.pk %}"
             ><i style="font-size: 24px" class="fa">&#xf040;</i></a
           >
@@ -33,6 +43,7 @@
           ><i style="font-size:24px" class="fa">&#xf014;</i></a>
         </td>
       </tr>
+      
 
       {% endfor %}
     </table>
