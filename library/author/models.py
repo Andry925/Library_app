@@ -51,3 +51,5 @@ class Author(models.Model):
     @staticmethod
     def get_all_authors():
         return Author.objects.all().order_by('id')
+    
+
