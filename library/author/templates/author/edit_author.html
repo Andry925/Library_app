@@ -8,15 +8,9 @@
       {% csrf_token %}
       <div class="form-group">
         {% for field, value in field_values.items %}
-          <span style="display: flex">
-            <input
-              type="text"
-              name="{{ field }}"
-              class="form-control"
-              placeholder="Edit {{ field }}"
-              value="{{value}}"
-            />
-          </span>
+        <span style="display: flex">
+          <input type="text" name="{{ field }}" class="form-control" placeholder="Edit {{ field }}" value="{{value}}" />
+        </span>
         {% endfor %}
         <button type="submit" class="btn btn-primary" style="width: 200px">
           <i class="fa fa-plus"></i> Edit

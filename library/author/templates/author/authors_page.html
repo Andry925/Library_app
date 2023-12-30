@@ -1,8 +1,5 @@
 {% extends 'author/base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 {% endblock %} {% block content %}
 
@@ -28,22 +25,19 @@
         <td>{{ author.surname }}</td>
         <td>{{ author.patronymic }}</td>
         <td>
-        {% for book in author.books.all %}
-       
-        {{book }}
-        
+          {% for book in author.books.all %}
 
-        {% endfor %}
+          {{book }}
+
+
+          {% endfor %}
         </td>
-      <td>
-          <a href="{% url 'edit_author' author.pk %}"
-            ><i style="font-size: 24px" class="fa">&#xf040;</i></a
-          >
-          <a href="{% url 'delete_author' author.pk %}"
-          ><i style="font-size:24px" class="fa">&#xf014;</i></a>
+        <td>
+          <a href="{% url 'edit_author' author.pk %}"><i style="font-size: 24px" class="fa">&#xf040;</i></a>
+          <a href="{% url 'delete_author' author.pk %}"><i style="font-size:24px" class="fa">&#xf014;</i></a>
         </td>
       </tr>
-      
+
 
       {% endfor %}
     </table>
