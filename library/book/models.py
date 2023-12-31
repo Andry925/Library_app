@@ -5,7 +5,8 @@ from author.models import Author
 class Book(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, unique=True)
-    count = models.IntegerField(default=True)
+    count = models.IntegerField(default=0)
+    genre = models.CharField(max_length=10, blank=True)
     author = models.ForeignKey(
         Author,
         on_delete=models.CASCADE,
