@@ -1,0 +1,34 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6 col-lg-6 p-0" style="position: absolute; bottom: 300px">
+    <h1>Add new book here</h1>
+    <form action="" class="form" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+
+
+        <span style="display: flex">
+          {{book_form.name}}<i>Name</i>
+        </span>
+
+        <span style="display: flex">
+          {{book_form.count}}<i>Count</i>
+        </span>
+
+        <span style="display: flex">
+          {{book_form.genre}}<i>Genre</i>
+        </span>
+
+        <span style="display: flex">
+          {{book_form.author}}<i>Author</i>
+        </span>
+        <button type="submit" class="btn btn-primary" style="width: 200px">
+          <i class="fa fa-plus"></i> Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
