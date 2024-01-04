@@ -30,22 +30,25 @@ class AddBookView(View):
             return redirect(self.redirect_url)
         context = {"book_form": book_form}
         return render(request, self.template_path, context)
-    
+
 
 class FilteredBooksView(View):
     template_path = "book/filter_books.html"
-    def get(self,request):
+
+    def get(self, request):
         author_surname = request.GET.get('author_surname')
         genre = request.GET.get('genre')
-        context = {"books": self.filter_by_author(author_surname)} if author_surname else {"books": self.filter_by_genre(genre)}
-        return render(request,self.template_path,context)
-    
+        context = {"books": self.filter_by_author(author_surname)} if author_surname else {
+            "books": self.filter_by_genre(genre)}
+        return render(request, self.template_path, context)
+
     def filter_by_author(self, author_surname):
-        filtered_queryset = Book.objects.filter(author__surname__iexact = author_surname)
+        filtered_queryset = Book.objects.filter(
+            author__surname__iexact=author_surname)
         return filtered_queryset
 
-    def filter_by_genre(self,genre):
+    def filter_by_genre(self, genre):
         pass
-    
+
 
 
