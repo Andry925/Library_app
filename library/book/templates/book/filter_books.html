@@ -4,10 +4,10 @@
 <div class="container">
     <div style="margin: 0 auto">
         <h1>On this page you can filter book by various criteria</h1>
-        <form action="" class="form" method="GET">
+        <form method="GET" action="{% url 'filter_book' %}">
             {% csrf_token %}
-            <input type="text" name="name" placeholder="Author name" required /><br />
-            <input type="text" name="surname" placeholder="Genre" required /><br />
+            <input type="text" name="author_surname" placeholder="Author surname" /><br />
+            <input type="text" name="genre" placeholder="Genre" /><br />
             <button type="submit">Filter</button>
         </form>
 
@@ -23,7 +23,7 @@
                 <br />
                 <table border="1">
                     {% include 'include/table_header.html' %}
-                    {% for book in all_books %}
+                    {% for book in books %}
                     <tr>
                         <td>{{ book.id }}</td>
                         <td>{{ book.name }}</td>
