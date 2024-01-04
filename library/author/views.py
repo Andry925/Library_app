@@ -42,14 +42,20 @@ class AuthorUpdateView(View):
     def get(self, request, pk):
         author = Author.get_author_by_id(pk=pk)
         field_values = {field: getattr(author, field) for field in self.fields}
-        context = {"author": author, "field_values": field_values}
-        return render(request, self.template_path, context)
+        self.context = {"author": author, "field_values": field_values}
+        return render(request, self.template_path, self.context)
 
     def post(self, request, pk):
         author = Author.get_author_by_id(pk=pk)
         for field in self.fields:
             setattr(author, field, request.POST.get(field))
-        author.save()
+        try:
+            author.save()
+        except IntegrityError:
+            error_message = "Author with this surname already exists"
+            messages.error(request, error_message)
+            self.get(request, pk)
+            return render(request, self.template_path, self.context)
         return redirect(self.redirect_url)
 
 
