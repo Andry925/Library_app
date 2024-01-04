@@ -44,11 +44,9 @@ class FilteredBooksView(View):
 
     def filter_by_author(self, author_surname):
         filtered_queryset = Book.objects.filter(
-            author__surname__iexact=author_surname)
+            author__surname__iexact=author_surname).order_by("id")
         return filtered_queryset
 
     def filter_by_genre(self, genre):
-        pass
-
-
-
+        filtered_queryset = Book.objects.filter(genre=genre).order_by("id")
+        return filtered_queryset
