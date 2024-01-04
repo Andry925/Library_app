@@ -5,7 +5,7 @@ from django.contrib import messages
 from .models import Author
 
 
-class AllUsersView(View):
+class AllAuthorsView(View):
     template_path = "author/authors_page.html"
 
     def get(self, request):
@@ -14,7 +14,7 @@ class AllUsersView(View):
         return render(request, self.template_path, context)
 
 
-class CreateUserView(View):
+class CreateAuthorsView(View):
     template_path = "author/new_author.html"
     redirect_url = "author_creation_form"
 
