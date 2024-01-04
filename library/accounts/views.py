@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib import messages
 from django.views import View
 from .utils import manage_user
 from .forms import UserForm
@@ -45,6 +46,8 @@ class LoginView(View):
         if user:
             login(request, user)
             return self.determine_appropriate_profile(request)
+        error_message = "User with these credentials does not exist"
+        messages.error(request, error_message)
         return render(request, self.template_name)
 
     def determine_appropriate_profile(self, request):
