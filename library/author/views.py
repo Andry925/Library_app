@@ -16,7 +16,7 @@ class AllAuthorsView(View):
 
 class CreateAuthorsView(View):
     template_path = "author/new_author.html"
-    redirect_url = "author_creation_form"
+    redirect_url = "all_authors"
 
     def get(self, request):
         return render(request, self.template_path)
@@ -52,7 +52,7 @@ class AuthorUpdateView(View):
         try:
             author.save()
         except IntegrityError:
-            error_message = "Author with this surname already exists"
+            error_message = "Not a valid surname to change"
             messages.error(request, error_message)
             self.get(request, pk)
             return render(request, self.template_path, self.context)
