@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.db import IntegrityError, transaction
 from .models import Author
 
 
@@ -25,3 +24,18 @@ class AuthorViewsTestCase(TestCase):
         response = self.client.get(self.create_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "author/new_author.html")
+
+    def test_create_authors_view_post(self):
+        response = self.client.post(self.create_url, data=self.author_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "author/new_author.html")
+
+    def test_author_update_view_post(self):
+        updated_data = {
+            "name": "Taras",
+            "surname": "Schevchenko",
+            "patronymic": "Grigorovich",
+        }
+        response = self.client.post(self.edit_url, data=updated_data)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("all_authors"))
