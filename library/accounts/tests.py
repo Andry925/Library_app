@@ -2,18 +2,18 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
+
 class AccountTests(TestCase):
     def setUp(self):
         self.user_data = {
             'email': 'test@example.com',
             'password': 'testpassword',
-            'first_name': 'John',
-            'last_name': 'Doe',
+            'first_name': 'Andrew',
+            'last_name': 'some',
             'username': 'johndoe',
             'role': 'User',
         }
         self.user = get_user_model().objects.create_user(**self.user_data)
-
 
     def test_login_view(self):
         response = self.client.get(reverse('login'))
@@ -25,7 +25,8 @@ class AccountTests(TestCase):
             'password': 'testpassword',
         }
         response = self.client.post(reverse('login'), data)
-        self.assertEqual(response.status_code, 302)  
+        self.assertEqual(response.status_code, 302)
+
     def test_user_profile_view(self):
         self.client.force_login(self.user)
         response = self.client.get(reverse('user_profile'))
@@ -50,8 +51,4 @@ class AccountTests(TestCase):
     def test_logout_view(self):
         self.client.force_login(self.user)
         response = self.client.get(reverse('logout'))
-        self.assertEqual(response.status_code, 302)  
-
-    
-
-    
+        self.assertEqual(response.status_code, 302)
