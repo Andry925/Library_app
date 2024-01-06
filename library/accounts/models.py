@@ -16,7 +16,8 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
-        if not (extra_fields.get("is_staff") and extra_fields.get("is_superuser")):
+        if not (extra_fields.get("is_staff")
+                and extra_fields.get("is_superuser")):
             raise ValueError(
                 "Super user must have both is_superuser and is_staff True")
         return self.create_user(email, password, **extra_fields)
@@ -41,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     updated_at = models.DateTimeField(auto_now=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name','username']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 
     objects = UserManager()
 
@@ -53,8 +54,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return True
-    
-
 
 
 class UserProfile(models.Model):
