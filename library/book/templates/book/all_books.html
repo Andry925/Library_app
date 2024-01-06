@@ -1,8 +1,5 @@
 {% extends 'book/base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 {% endblock %} {% block content %}
 
@@ -11,13 +8,19 @@
     <h1>All books:</h1>
     <br />
     <table border="1">
-      {% include 'include/table_header.html' %}
+      <tr>
+        <th>BOOK_ID</th>
+        <th>BOOK_NAME</th>
+        <th>BOOK_COUNT</th>
+        <th>BOOK_AUTHOR</th>
+        <th>ACTIONS</th>
+      </tr>
 
       {% for book in all_books %}
       <tr>
         <td>{{ book.id }}</td>
         <td>{{ book.name }}</td>
-        <td>{{ book.count }}</td>
+        <td>{{ book.count}}</td>
         <td>{{ book.author }}</td>
         <td>
           <a href=""><i style="font-size: 24px" class="fa">&#xf040;</i></a>

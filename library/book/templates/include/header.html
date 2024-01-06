@@ -2,23 +2,14 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark font-italic">
     <a class="navbar-brand" href="#">Library</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link" href="{% url 'add_book' %}"
-          >Add new book</a
-        >
-        <a class="nav-item nav-link" href="">Search book by some criteria</a>
+        <a class="nav-item nav-link" href="{% url 'add_book' %}">Add new book</a>
+        <a class="nav-item nav-link" href="{% url 'filter_book' %}">Search book by some criteria</a>
       </div>
     </div>
   </nav>

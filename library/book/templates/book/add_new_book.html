@@ -19,13 +19,13 @@
     </form>
     {% for field in book_form %}
     {% if field.errors %}
-      {% for error in field.errors %}
-      <li style="color: darkred">{{error}}</li>
-      {% endfor %}
-      {% endif %}
-      {% endfor %}
+    {% for error in field.errors %}
+    <li style="color: darkred">{{error}}</li>
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
 
   </div>
-  
+
 </div>
 {% endblock %}
