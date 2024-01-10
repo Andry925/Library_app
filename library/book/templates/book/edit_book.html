@@ -1,0 +1,32 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6 col-lg-6 p-0" style="position: absolute; bottom: 300px">
+    <h1>Edit your task here</h1>
+    <form action="{% url 'edit' book.pk %}" class="form" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+     
+       
+        <span style="display: flex">
+            <i>{{book.name}}</i>
+
+          </span>
+          <span style="display: flex">
+            
+          </span>
+          <span style="display: flex">
+            
+          </span>
+          <span style="display: flex">
+            
+          </span>
+        <button type="submit" class="btn btn-primary" style="width: 200px">
+          <i class="fa fa-plus"></i> Edit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

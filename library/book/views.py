@@ -1,12 +1,12 @@
 from django.shortcuts import redirect, render
 from django.views import View
 from .models import Book
-from .forms import BookCreationForm
+from .forms import BookCreationForm,BookEditForm
 
 
 class AllBooksView(View):
     template_path = "book/all_books.html"
-
+    
     def get(self, request):
         all_books = Book.get_all_books()
         context = {"all_books": all_books}
@@ -50,3 +50,32 @@ class FilteredBooksView(View):
     def filter_by_genre(self, genre):
         filtered_queryset = Book.objects.filter(genre=genre).order_by("id")
         return filtered_queryset
+    
+
+class EditBookView(View):
+    template_path = "book/edit_book.html"
+    
+    def get(self,request,pk):
+        book = Book.objects.get(pk=pk)
+        
+        context = {
+            
+            "book":book
+        }
+        return render(request,self.template_path,context)
+
+        
+
+
+class DeleteBookView(View):
+
+    redirect_url = "book/all_books.html"
+
+    def get(self, request, pk):
+        book = Book.objects.get(pk=pk)
+        book.delete()
+        context = {
+            "book": book,
+            "hello": "hello"
+        }
+        return render(request, self.redirect_url, context)

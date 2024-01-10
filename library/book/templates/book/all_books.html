@@ -23,12 +23,13 @@
         <td>{{ book.count}}</td>
         <td>{{ book.author }}</td>
         <td>
-          <a href=""><i style="font-size: 24px" class="fa">&#xf040;</i></a>
-          <a href=""><i style="font-size: 24px" class="fa">&#xf014;</i></a>
+          <a href="{% url 'edit' book.pk % }"><i style="font-size: 24px" class="fa">&#xf040;</i></a>
+          <a href="{% url 'delete_book' book.pk %}"><i style="font-size: 24px" class="fa">&#xf014;</i></a>
         </td>
       </tr>
 
       {% endfor %}
+
     </table>
   </div>
 </div>
