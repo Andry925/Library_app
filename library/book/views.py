@@ -63,3 +63,15 @@ class EditBookView(View):
         context = {"book": book_instance,
                    "edit_book_form": edit_book}
         return render(request, self.template_path, context)
+
+    def post(self, request, pk):
+        book_instance = Book.get_book_details(pk=pk)
+        edit_book_to_save = self.edit_form(
+            request.POST, instance=book_instance)
+        if edit_book_to_save.is_valid():
+            edit_book_to_save.save()
+            return redirect(self.redirect_url)
+        context = {"book": book_instance}
+        return render(request, self.template_path, context)
+
+
