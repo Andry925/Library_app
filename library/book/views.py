@@ -75,3 +75,11 @@ class EditBookView(View):
         return render(request, self.template_path, context)
 
 
+class DeleteBookView(View):
+
+    redirect_url = "all_books"
+
+    def get(self, request, pk):
+        book = Book.get_book_details(pk=pk)
+        book.delete()
+        return redirect(self.redirect_url)
