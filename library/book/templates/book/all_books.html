@@ -1,5 +1,8 @@
 {% extends 'book/base.html' %} {% block head %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 
 {% endblock %} {% block content %}
 
@@ -23,13 +26,16 @@
         <td>{{ book.count}}</td>
         <td>{{ book.author }}</td>
         <td>
-          <a href="{% url 'edit' book.pk % }"><i style="font-size: 24px" class="fa">&#xf040;</i></a>
-          <a href="{% url 'delete_book' book.pk %}"><i style="font-size: 24px" class="fa">&#xf014;</i></a>
+          <a href="{% url 'edit' book.pk %}"
+            ><i style="font-size: 24px" class="fa">&#xf040;</i></a
+          >
+          <a href="{% url 'delete_book' book.pk %}"
+            ><i style="font-size: 24px" class="fa">&#xf014;</i></a
+          >
         </td>
       </tr>
 
       {% endfor %}
-
     </table>
   </div>
 </div>
