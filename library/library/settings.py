@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'author',
     'book'
+    'order'
 ]
 
 MIDDLEWARE = [
@@ -81,11 +82,11 @@ DATABASE = "simpledbmamager"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': '5432',
+        'NAME': 'my_project',
+        'USER': 'postgres',
+        'PASSWORD': 'django',
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
 
