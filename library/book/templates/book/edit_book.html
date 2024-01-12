@@ -27,6 +27,17 @@
       <button type="submit" class="btn btn-primary" style="width: 200px">
         <i class="fa fa-plus"></i> Edit
       </button>
+      <ul class="errorlist">
+        {% for field in edit_book_form %}
+        {% if field.errors %}
+        {% for error in field.errors %}
+        <li style="color: darkred;">{{error}}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+
+      </ul>
+
     </form>
   </div>
 </div>
