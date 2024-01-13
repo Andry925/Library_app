@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from accounts.models import User
@@ -22,11 +22,11 @@ class Order(models.Model):
     expired_at = models.DateTimeField(default=None, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if not self.expired_at:
-            self.expired_at = self.calculate_expired_date()
+        self.expired_at = self.calculate_expired_date()
         super().save(*args, **kwargs)
 
     def calculate_expired_date(self):
+        self.borrowed_at = datetime.now()
         expire_date = self.borrowed_at + \
             timedelta(days=self.max_days_to_take_book)
         return expire_date
