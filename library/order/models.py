@@ -16,7 +16,7 @@ class Order(models.Model):
         on_delete=models.CASCADE,
         related_name="book")
     borrowed_at = models.DateTimeField(auto_now_add=True)
-    max_days_to_take_book = models.IntegerField(
+    max_days_to_take_book = models.PositiveIntegerField(
         default=0, validators=[
             MinValueValidator(0), MaxValueValidator(30)])
     expired_at = models.DateTimeField(default=None, blank=True, null=True)
