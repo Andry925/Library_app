@@ -66,4 +66,4 @@ class UserProfile(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.user}'
+        return f'{self.user} with role {self.user.role}'
