@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("accounts.urls")),
     path("librarian_profile/",include("author.urls")),
-    path("librarian_profile/",include("book.urls"))
+    path("librarian_profile/",include("book.urls")),
+    path("user_profile/",include("order.urls")),
 ]
