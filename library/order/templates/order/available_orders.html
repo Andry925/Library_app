@@ -1,0 +1,39 @@
+{% extends 'order/base.html' %} {% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+
+{% endblock %} {% block content %}
+
+<div class="container">
+  <div style="margin: 0 auto">
+    <h1>All orders:</h1>
+    <br />
+    <table border="1">
+      <tr>
+        <th>ORDER_ID</th>
+        <th>NUMBER OF BOOKS</th>
+        <th>BOOK</th>
+        <th>BOOK'S AUTHOR</th>
+      </tr>
+
+      {% for order in all_orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.book.count }}</td>
+        <td>{{ order.book }}</td>
+        <td>{{ order.book.author }}</td>
+
+        <td>
+          <a href=""><i style="font-size: 24px" class="fa">&#xf040;</i></a>
+          <a href=""><i style="font-size: 24px" class="fa">&#xf014;</i></a>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock %}
