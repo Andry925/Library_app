@@ -21,6 +21,9 @@ class Order(models.Model):
             MinValueValidator(0), MaxValueValidator(30)])
     expired_at = models.DateTimeField(default=None, blank=True, null=True)
 
+    class Meta:
+        unique_together = ("user", "book")
+
     def save(self, *args, **kwargs):
         self.expired_at = self.calculate_expired_date()
         super().save(*args, **kwargs)
