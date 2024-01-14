@@ -3,4 +3,5 @@
 {% block content %}
 <p>Welcome to our account {{user.username}}</p>
 <p>Your role is {{user.role}} </p>
+<p><a href="{% url 'available_orders' %}"> Click here to view available orders </a></p>
 {% endblock %}
