@@ -30,3 +30,8 @@ class Order(models.Model):
         expire_date = self.borrowed_at + \
             timedelta(days=self.max_days_to_take_book)
         return expire_date
+
+    @staticmethod
+    def get_all_orders():
+        all_orders = Order.objects.all()
+        return all_orders
