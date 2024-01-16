@@ -1,9 +1,12 @@
 from django.shortcuts import redirect, render
 from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .models import Book
 from .forms import BookCreationForm, BookEditForm
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class AllBooksView(View):
     template_path = "book/all_books.html"
 
@@ -13,6 +16,7 @@ class AllBooksView(View):
         return render(request, self.template_path, context)
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class AddBookView(View):
     template_path = "book/add_new_book.html"
     book_form = BookCreationForm
@@ -32,6 +36,7 @@ class AddBookView(View):
         return render(request, self.template_path, context)
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class FilteredBooksView(View):
     template_path = "book/filter_books.html"
 
@@ -52,6 +57,7 @@ class FilteredBooksView(View):
         return filtered_queryset
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class EditBookView(View):
     template_path = "book/edit_book.html"
     redirect_url = "all_books"
@@ -75,6 +81,7 @@ class EditBookView(View):
         return render(request, self.template_path, context)
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class DeleteBookView(View):
 
     redirect_url = "all_books"

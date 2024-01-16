@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.db import IntegrityError
 from django.contrib import messages
 from .models import Author
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class AllAuthorsView(View):
     template_path = "author/authors_page.html"
 
@@ -14,6 +17,7 @@ class AllAuthorsView(View):
         return render(request, self.template_path, context)
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class CreateAuthorsView(View):
     template_path = "author/new_author.html"
     redirect_url = "all_authors"
@@ -34,6 +38,7 @@ class CreateAuthorsView(View):
             return render(request, self.template_path)
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class AuthorUpdateView(View):
     template_path = "author/edit_author.html"
     redirect_url = "all_authors"
@@ -59,6 +64,7 @@ class AuthorUpdateView(View):
         return redirect(self.redirect_url)
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class AuthorDeleteView(View):
     redirect_url = "all_authors"
 
