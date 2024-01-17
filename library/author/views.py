@@ -4,21 +4,23 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db import IntegrityError
 from django.contrib import messages
+from accounts.utils import TestMixIn
 from .models import Author
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class AllAuthorsView(View):
+class AllAuthorsView(TestMixIn, View):
     template_path = "author/authors_page.html"
 
     def get(self, request):
         all_authors = Author.get_all_authors()
-        context = {"all_authors": all_authors}
+        user = self.request.user
+        context = {"all_authors": all_authors, "user": user}
         return render(request, self.template_path, context)
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class CreateAuthorsView(View):
+class CreateAuthorsView(TestMixIn, View):
     template_path = "author/new_author.html"
     redirect_url = "all_authors"
 
@@ -39,7 +41,7 @@ class CreateAuthorsView(View):
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class AuthorUpdateView(View):
+class AuthorUpdateView(TestMixIn, View):
     template_path = "author/edit_author.html"
     redirect_url = "all_authors"
     fields = ("name", "surname", "patronymic")
@@ -65,7 +67,7 @@ class AuthorUpdateView(View):
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class AuthorDeleteView(View):
+class AuthorDeleteView(TestMixIn, View):
     redirect_url = "all_authors"
 
     def get(self, request, pk):
