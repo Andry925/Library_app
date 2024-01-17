@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.views import View
-from .utils import manage_user
+from .utils import manage_user, TestMixIn
 from .forms import UserForm
 
 
@@ -65,7 +65,7 @@ class UserProfileView(View):
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class LibrarianProfileView(View):
+class LibrarianProfileView(TestMixIn, View):
     template_name = "profiles/librarianprofile.html"
 
     def get(self, request):
