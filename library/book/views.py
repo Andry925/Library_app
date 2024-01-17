@@ -2,12 +2,13 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from accounts.utils import TestMixIn
 from .models import Book
 from .forms import BookCreationForm, BookEditForm
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class AllBooksView(View):
+class AllBooksView(TestMixIn,View):
     template_path = "book/all_books.html"
 
     def get(self, request):
@@ -17,7 +18,7 @@ class AllBooksView(View):
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class AddBookView(View):
+class AddBookView(TestMixIn,View):
     template_path = "book/add_new_book.html"
     book_form = BookCreationForm
     redirect_url = "all_books"
@@ -37,7 +38,7 @@ class AddBookView(View):
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class FilteredBooksView(View):
+class FilteredBooksView(TestMixIn,View):
     template_path = "book/filter_books.html"
 
     def get(self, request):
@@ -58,7 +59,7 @@ class FilteredBooksView(View):
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class EditBookView(View):
+class EditBookView(TestMixIn,View):
     template_path = "book/edit_book.html"
     redirect_url = "all_books"
     edit_form = BookEditForm
@@ -82,7 +83,7 @@ class EditBookView(View):
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
-class DeleteBookView(View):
+class DeleteBookView(TestMixIn,View):
 
     redirect_url = "all_books"
 
