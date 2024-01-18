@@ -47,7 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.username}'
 
     def has_perm(self, perm, obj=None):
         return self.is_superuser
@@ -61,9 +61,18 @@ class UserProfile(models.Model):
         User,
         on_delete=models.CASCADE,
         blank=True,
-        null=True)
+        null=True, related_name="profile")
+    profile_role = models.CharField(default=None, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        self.profile_role = self.calculate_expired_date()
+        super().save(*args, **kwargs)
+
+    def calculate_expired_date(self):
+        profile_role = f"{self.user.role}_profile"
+        return profile_role
+
     def __str__(self):
-        return f'{self.user} with role {self.user.role}'
+        return f'{self.profile_role}'
