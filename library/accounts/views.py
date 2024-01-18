@@ -13,6 +13,11 @@ class RegistrationView(View):
     user_form = UserForm
 
     def get(self, request):
+        if self.request.user.is_authenticated:
+            redirect_profile = self.request.user.profile.first()
+            messages.warning(request, "You are already registered")
+            return redirect(redirect_profile.profile_role.lower())
+
         registration_form = self.user_form()
         context = {"registration_form": registration_form}
         return render(request, self.template_name, context)
@@ -37,6 +42,10 @@ class LoginView(View):
     template_name = "accounts/login.html"
 
     def get(self, request):
+        if self.request.user.is_authenticated:
+            redirect_profile = self.request.user.profile.first()
+            messages.warning(request, "You are already registered")
+            return redirect(redirect_profile.profile_role.lower())
         return render(request, self.template_name)
 
     def post(self, request):
