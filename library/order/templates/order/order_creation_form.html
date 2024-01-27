@@ -1,0 +1,31 @@
+{% extends 'order/base.html' %} {% block content %}
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6 col-lg-6 p-0" style="position: absolute; bottom: 300px">
+    <h1>Here you can take a book</h1>
+    <form action="{% url 'create_order' %}" class="form" method="POST">
+      {% csrf_token %}
+     <div class="form-group">
+    <span style="display: flex">{{ order.book }}<i>Choose a book</i></span>
+    <span style="display: flex">{{ order.max_days_to_take_book }}<i>Choose max amount of days</i></span>
+
+    <button type="submit" class="btn btn-primary" style="width: 200px">
+        <i class="fa fa-plus"></i> Add
+    </button>
+</div>
+    </form>
+      {% for field in order %}
+    {% if field.errors %}
+    {% for error in field.errors %}
+    <li style="color: darkred">{{error}}</li>
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+
+  </div>
+
+</div>
+{% endblock %}
+
+
+
+
