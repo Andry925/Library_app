@@ -13,6 +13,7 @@
     </button>
 </div>
     </form>
+  <ul class="errorlist">
       {% for field in order %}
     {% if field.errors %}
     {% for error in field.errors %}
@@ -20,6 +21,9 @@
     {% endfor %}
     {% endif %}
     {% endfor %}
+  <li style="color: darkred;">{{order.non_field_errors}}</li>
+  </ul>
+
 
   </div>
 
