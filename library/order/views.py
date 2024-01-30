@@ -24,7 +24,7 @@ class CreateOrderView(View):
     order_creation_form = OrderCreateForm
 
     def get(self, request):
-        order_creation_form = self.order_creation_form(initial={'user': request.user})
+        order_creation_form = self.order_creation_form()
         context = {
             "order": order_creation_form
         }
@@ -32,12 +32,12 @@ class CreateOrderView(View):
 
     def post(self, request):
         order_creation_form = self.order_creation_form(request.POST)
+        order_creation_form.user = request.user
         if order_creation_form.is_valid():
             order_instance = order_creation_form.save(commit=False)
             order_instance.user = request.user
             order_instance.save()
             return redirect(self.redirect_url)
-
         context = {
             "order": order_creation_form
         }
