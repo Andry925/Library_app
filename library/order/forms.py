@@ -17,8 +17,5 @@ class OrderCreateForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(OrderCreateForm, self).clean()
         book = cleaned_data.get('book')
-        print(self.user)
-        if Order.objects.filter(book=book).exists() and Order.objects.filter(user=self.user).exists():
-            raise forms.ValidationError(
-                "You can not book this book anymore"
-            )
+        if Order.objects.filter(user=self.user, book=book).exists():
+            raise forms.ValidationError("You can not book this book any more")
