@@ -1,7 +1,46 @@
 {% extends 'profiles/base.html' %}
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 
 {% block content %}
-<p>Welcome to our account {{user.username}}</p>
-<p>Your role is {{user.role}} </p>
-<p><a href="{% url 'available_orders' %}"> Click here to view available orders </a></p>
+    <p>Welcome to our account {{ user.username }}</p>
+    <p>Your role is {{ user.role }} </p>
+    <h1>Here are your orders</h1>
+    <div class="container">
+        <div style="margin: 0 auto">
+            <h1>All books:</h1>
+            <br/>
+            <table border="1">
+                <tr>
+                    <th>ORDER_ID</th>
+                    <th>BOOK_NAME</th>
+                    <th>BOOK_AUTHOR</th>
+                    <th>RETURN AT</th>
+                    <th>CLOSE ORDER</th>
+
+                </tr>
+
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a href=""
+                        ><i style="font-size: 24px" class="fa">&#xf040;</i></a
+                        >
+                        <a href=""
+                        ><i style="font-size: 24px" class="fa">&#xf014;</i></a
+                        >
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+    <p><a href="{% url 'available_orders' %}"> Click here to view available orders </a></p>
 {% endblock %}
