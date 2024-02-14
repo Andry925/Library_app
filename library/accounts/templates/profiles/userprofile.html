@@ -5,12 +5,9 @@
 />
 
 {% block content %}
-    <p>Welcome to our account {{ user.username }}</p>
-    <p>Your role is {{ user.role }} </p>
     <h1>Here are your orders</h1>
     <div class="container">
         <div style="margin: 0 auto">
-            <h1>All books:</h1>
             <br/>
             <table border="1">
                 <tr>
@@ -22,12 +19,12 @@
 
                 </tr>
 
-
+                {% for order in related_orders %}
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.book.name }}</td>
+                    <td>{{ order.book.author }}</td>
+                    <td>{{ order.expired_at }}</td>
                     <td>
                         <a href=""
                         ><i style="font-size: 24px" class="fa">&#xf040;</i></a
@@ -38,9 +35,11 @@
                     </td>
                 </tr>
 
-
+            {% endfor %}
             </table>
         </div>
     </div>
+    <br/>
+    <br/>
     <p><a href="{% url 'available_orders' %}"> Click here to view available orders </a></p>
 {% endblock %}

@@ -1,9 +1,42 @@
 {% extends 'profiles/base.html' %}
 
 {% block content %}
-<p>Welcome to our account {{user.username}}</p>
+<h1>Here are all ordered books</h1>
+    <div class="container">
+        <div style="margin: 0 auto">
+            <br/>
+            <table border="1">
+                <tr>
+                    <th>ORDER_ID</th>
+                    <th>BOOK_NAME</th>
+                    <th>ORDER_USER</th>
+                    <th>RETURN AT</th>
+                    <th>CLOSE ORDER</th>
 
-<p>Your role is {{user.role}} </p>
+                </tr>
+
+                {% for order in all_orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.book.name }}</td>
+                    <td>{{ order.user }}</td>
+                    <td>{{ order.expired_at }}</td>
+                    <td>
+                        <a href=""
+                        ><i style="font-size: 24px" class="fa">&#xf040;</i></a
+                        >
+                        <a href=""
+                        ><i style="font-size: 24px" class="fa">&#xf014;</i></a
+                        >
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    <br/>
+    <br/>
 
     <p><a href="{% url 'all_authors' %}"> Click here to manage authors</a></p>
 
