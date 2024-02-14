@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.views import View
+from order.models import Order
 from .utils import manage_user, TestMixIn
 from .forms import UserForm
 
@@ -70,7 +71,11 @@ class UserProfileView(View):
     template_name = "profiles/userprofile.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        related_orders = Order.objects.filter(user=request.user)
+        context = {
+            "related_orders": related_orders
+        }
+        return render(request, self.template_name, context)
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
@@ -78,7 +83,12 @@ class LibrarianProfileView(TestMixIn, View):
     template_name = "profiles/librarianprofile.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        all_orders = Order.objects.all()
+        context = {
+            "all_orders": all_orders
+        }
+
+        return render(request, self.template_name, context)
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
