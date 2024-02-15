@@ -25,5 +25,5 @@ class OrderCreateForm(forms.ModelForm):
 
     def validate_book_amount(self, book_name, days):
         book = Book.objects.get(name=book_name)
-        if book.count <= days:
+        if book.count <= days or book.count == 0:
             raise forms.ValidationError("We do not have such amount of books")
