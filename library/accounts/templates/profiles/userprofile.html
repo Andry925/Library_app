@@ -1,45 +1,46 @@
 {% extends 'profiles/base.html' %}
 <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
 
 {% block content %}
-    <h1>Here are your orders</h1>
-    <div class="container">
-        <div style="margin: 0 auto">
-            <br/>
-            <table border="1">
-                <tr>
-                    <th>ORDER_ID</th>
-                    <th>BOOK_NAME</th>
-                    <th>BOOK_AUTHOR</th>
-                    <th>RETURN AT</th>
-                    <th>CLOSE ORDER</th>
+<h1>Here are your orders</h1>
+<div class="container">
+  <div style="margin: 0 auto">
+    <br />
+    <table border="1">
+      <tr>
+        <th>ORDER_ID</th>
+        <th>BOOK_NAME</th>
+        <th>BOOK_AUTHOR</th>
+        <th>RETURN AT</th>
+        <th>BOOK AMOUNT</th>
+        <th>CLOSE ORDER</th>
+      </tr>
 
-                </tr>
+      {% for order in related_orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.book.name }}</td>
+        <td>{{ order.book.author }}</td>
+        <td>{{ order.expired_at }}</td>
+        <td>{{ order.max_days_to_take_book }}</td>
+        <td>
+          <a href=""><i style="font-size: 24px" class="fa">&#xf040;</i></a>
+          <a href=""><i style="font-size: 24px" class="fa">&#xf014;</i></a>
+        </td>
+      </tr>
 
-                {% for order in related_orders %}
-                <tr>
-                    <td>{{ order.id }}</td>
-                    <td>{{ order.book.name }}</td>
-                    <td>{{ order.book.author }}</td>
-                    <td>{{ order.expired_at }}</td>
-                    <td>
-                        <a href=""
-                        ><i style="font-size: 24px" class="fa">&#xf040;</i></a
-                        >
-                        <a href=""
-                        ><i style="font-size: 24px" class="fa">&#xf014;</i></a
-                        >
-                    </td>
-                </tr>
-
-            {% endfor %}
-            </table>
-        </div>
-    </div>
-    <br/>
-    <br/>
-    <p><a href="{% url 'available_orders' %}"> Click here to view available orders </a></p>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br />
+<br />
+<p>
+  <a href="{% url 'available_orders' %}">
+    Click here to view available orders
+  </a>
+</p>
 {% endblock %}
